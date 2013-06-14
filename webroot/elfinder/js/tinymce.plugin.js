@@ -1,8 +1,7 @@
 tinymce.PluginManager.add("elfinder", function (editor, url) {
-  url = window.location.protocol + '//' + window.location.host + '/ElFinder/elfinder';
   editor.settings.file_browser_callback = function (id, value, type, win) {
     $('<div />').dialogelfinder({
-       url: url + '/php/connector.php',
+       url: '/admin/el_finder/el_finder/connector',
        commandsOptions: {
           getfile: {
              oncomplete: 'destroy'

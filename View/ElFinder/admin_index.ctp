@@ -10,8 +10,8 @@ $this->Html
 <script type="text/javascript" charset="utf-8">
 	$().ready(function() {
 		var elf = $('#elfinder').elfinder({
-			url : '/ElFinder/elfinder/php/connector.php'  // connector URL (REQUIRED)
-		}).elfinder('instance');			
+			url : '/admin/el_finder/el_finder/connector'  // connector URL (REQUIRED)
+		}).elfinder('instance');		
 	});
 </script>
 
