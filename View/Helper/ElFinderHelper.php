@@ -45,14 +45,14 @@ class ElFinderHelper extends AppHelper {
 	public function beforeRender($viewFile) {
 		$this->Html->css(
 		  array(
-		    'http://code.jquery.com/ui/1.8.18/themes/smoothness/jquery-ui.css', 
-		    '/ElFinder/elfinder/css/elfinder.min'
+		    '/croogo/ui-themes/smoothness/jquery-ui', 
+		    '/el_finder/css/elfinder.min'
 		  ),
 		  null,
 		  array('inline' => false)
 		);
 	  $this->Html->script(
-	    array('/ElFinder/elfinder/js/elfinder.min'),
+	    array('ElFinder.elfinder.min'),
 	    array('inline' => false)
 	  );
 	  
@@ -63,9 +63,9 @@ class ElFinderHelper extends AppHelper {
 		if (Configure::read('Writing.wysiwyg') && isset($this->actions[$action])) {
 		  $this->_CroogoPlugin = new CroogoPlugin();
 		  if ($this->_CroogoPlugin->isActive('ckeditor')) {
-	  	  Configure::write('Js.Wysiwyg.attachmentsPath', Router::url('/ElFinder/elfinder/elfinder-ckeditor.html'));
+	  	  Configure::write('Js.Wysiwyg.attachmentsPath', Router::url('ElFinder.elfinder-ckeditor.html'));
 		  } elseif ($this->_CroogoPlugin->isActive('tinymce')) {
-		    Configure::write('Js.Wysiwyg.attachmentsPath', Router::url('/ElFinder/elfinder/elfinder-tinymce.html'));
+		    Configure::write('Js.Wysiwyg.attachmentsPath', Router::url('ElFinder.elfinder-tinymce.html'));
 		  }
 		}
 	}

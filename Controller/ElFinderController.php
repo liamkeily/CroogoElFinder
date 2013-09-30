@@ -37,24 +37,47 @@ class ElFinderController extends ElFinderAppController {
 	public $uses = array();
 
 /**
+ * Path can be defined and will be appended to the default path.
+ * Can be used to give each user their root folder
+ *
+ * @var string
+ * @access public
+ */
+	public $path = '';
+
+/**
  * admin_index
  *
  * @return void
  */
+
+
+	public function beforeFilter(){
+
+		$this->Security->unlockedActions[] = 'admin_connector';
+
+		parent::beforeFilter();
+	}
+
 	public function admin_index() {
 		$this->set('title_for_layout', 'ElFinder Attachments');
 	}
 
 	public function admin_connector(){
 		Configure::write('debug',0);
+		
+		if(!file_exists(APP.'webroot/uploads/'.$this->path)){
+			mkdir(APP.'webroot/uploads/'.$this->path);
+			chmod(APP.'webroot/uploads/'.$this->path,0777);
+		}
 
 		$opts = array(
 			'roots' => array(
 				array(
 					'driver'        => 'LocalFileSystem',   // driver for accessing file system (REQUIRED)
-					'path'          => APP.'/webroot/uploads/',         // path to files (REQUIRED)
-					'URL'           => 'http://'.$_SERVER['SERVER_NAME'] . '/uploads/', // URL to files (REQUIRED)
-					'accessControl' => 'access'             // disable and hide dot starting files (OPTIONAL)
+					'path'          => APP.'webroot/uploads/'.$this->path,         // path to files (REQUIRED)
+					'URL'           => 'http://'.$_SERVER['SERVER_NAME'] . '/uploads/'.$this->path, // URL to files (REQUIRED)
+					'accessControl' => array($this,'access')            // disable and hide dot starting files (OPTIONAL)
 				)
 			)
 		);
@@ -63,7 +86,7 @@ class ElFinderController extends ElFinderAppController {
 		$this->connector->run();
 	}
 
-	protected function access($attr, $path, $data, $volume) {
+	function access($attr, $path, $data, $volume) {
 	return strpos(basename($path), '.') === 0       // if file/folder begins with '.' (dot)
 		? !($attr == 'read' || $attr == 'write')    // set read+write to false, other (locked+hidden) set to true
 		:  null;                                    // else elFinder decide it itself

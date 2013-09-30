@@ -4,7 +4,7 @@ $this->extend('/Common/admin_index');
 
 $this->Html
 	->addCrumb('', '/admin', array('icon' => 'home'))
-	->addCrumb('Attachments (elFinder)', array('controller' => 'el_finder', 'action' => 'index'));
+	->addCrumb('File Manager', array('controller' => 'el_finder', 'action' => 'index'));
 ?>
 
 <script type="text/javascript" charset="utf-8">
@@ -15,5 +15,6 @@ $this->Html
 	});
 </script>
 
+<div class="alert">Only use this file manager to store <strong>PUBLIC</strong> files. <small>All of these files can be accessed by a public URL.</small></div>
 <!-- Element where elFinder will be created (REQUIRED) -->
 <div id="elfinder"></div>
