@@ -22,16 +22,13 @@ Step 1. Include the script
 
 Step 2. Add an event handler to a button.
 
-`
-$(function(){
-$("#select_image").click(function(){
-imagepicker.getFiles(function(files){
-	console.log(files);
-	for(i in files){
-		var file = files[i];
-	}
-});
-});
-});
-`
-
+> $(function(){
+> $("#select_image").click(function(){
+> imagepicker.getFiles(function(files){
+> 	console.log(files);
+> 	for(i in files){
+> 		var file = files[i];
+> 	}
+> });
+> });
+> });
